@@ -72,14 +72,15 @@ def split_text(text):
 # Create Vector Store
 # =========================
 def create_vector_store(chunks):
+    temp_dir = tempfile.mkdtemp()
+
     vector_store = Chroma.from_texts(
         texts=chunks,
         embedding=embeddings,
-        persist_directory="db"
+        persist_directory=temp_dir
     )
 
     return vector_store
-
 
 # =========================
 # Build Prompt
